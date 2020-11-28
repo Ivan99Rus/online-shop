@@ -1,50 +1,61 @@
 {
   "products": [
     {
-      "image": "1.jpg",
-      "name": "T-shirt 1",
-      "price": 2100.234234234,
-      "article": "T1",
+      "image": "woman-1.webp",
+      "name": "Eco Series пуховик из переработанного полиэстера",
+      "price": 27300,
+      "oldPrice": 30000,
+      "article": "J20J214856_AEO",
+      "available": true,
+      "category": "Женские"
+    },
+    {
+      "image": "men-1.webp",
+      "name": "Пуховик свободного кроя с облачным принтом",
+      "price": 24900,
+      "oldPrice": 30000,
+      "article": "J30J316627_BEH",
       "available": true,
       "category": "Мужские"
     },
     {
-      "image": "2.jpg",
-      "name": "T-shirt 2",
-      "price": 3150.12312412,
-      "article": "T2",
-      "available": true,
-      "category": "Женские"
-    },
-    {
-      "image": "3.jpg",
-      "name": "T-shirt 3",
-      "price": 4200.51524,
-      "article": "T3",
-      "available": false,
-      "category": "Женские"
-    },
-    {
-      "image": "4.jpg",
-      "name": "T-shirt 4",
-      "price": 5300.1245512,
-      "article": "T4",
+      "image": "men-2.webp",
+      "name": "Джинсовая куртка-бомбер с искусственным мехом",
+      "price": 24900,
+      "oldPrice": 30000,
+      "article": "J30J316193_1BY",
       "available": true,
       "category": "Мужские"
     },
     {
-      "image": "5.jpg",
-      "name": "T-shirt 5",
-      "price": 6500.3522314,
-      "article": "T5",
-      "available": false,
+      "image": "woman-2.webp",
+      "name": "Eco Series пуховик из переработанного полиэстера",
+      "price": 27300,
+      "article": "J20J214856_XME",
+      "available": true,
       "category": "Женские"
     },
     {
-      "image": "6.jpeg",
-      "name": "T-shirt 6",
-      "price": 8700.4124123,
-      "article": "T6",
+      "image": "men-3.webp",
+      "name": "Свободный анорак из нетканого искусственного меха",
+      "price": 18300,
+      "article": "J30J316890_LDD",
+      "available": true,
+      "category": "Мужские"
+    },
+    {
+      "image": "men-4.webp",
+      "name": "Двухцветная джинсовая куртка",
+      "price": 11460,
+      "article": "J30J315530_1AA",
+      "available": true,
+      "category": "Мужские"
+    },
+    {
+      "image": "woman-3.webp",
+      "name": "Худи из органического хлопка размера плюс",
+      "price": 11200,
+      "article": "J20J215186_AEO",
       "available": true,
       "category": "Женские"
     }

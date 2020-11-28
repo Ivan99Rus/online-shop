@@ -7,11 +7,28 @@ Vue.use(Vuex);
 let store = new Vuex.Store ({
   state: {
     products: [],
-    cart: []
+    cart: [],
+    wish: [],
   },
   mutations: {
     SET_PRODUCTS_TO_STATE: (state, products) => {
       state.products = products;
+    },
+    SET_WISH: (state, product) => {
+      if (state.wish.length) {
+        let isProductExists = false;
+
+        state.wish.map(item => item.article === product.article ? isProductExists = true : isProductExists = false);
+        
+        if (!isProductExists) {
+          state.wish.push(product);
+        }
+      } else {
+        state.wish.push(product);
+      }
+    },
+    REMOVE_FROM_WISH: (state, product) => {
+      state.wish = state.wish.filter(el => el.article !== product.article)
     },
     SET_CART: (state, product) => {
       if (state.cart.length) {
@@ -60,6 +77,12 @@ let store = new Vuex.Store ({
     ADD_TO_CART({commit}, product) {
       commit('SET_CART', product)
     },
+    ADD_TO_WISH({commit}, product) {
+      commit('SET_WISH', product);
+    },
+    DELETE_FROM_WISH({commit}, article) {
+      commit('REMOVE_FROM_WISH', article)
+    },
     INCREMENT_CART_ITEM({commit}, index) {
       commit('INCREMENT', index)
     },
@@ -76,6 +99,9 @@ let store = new Vuex.Store ({
     },
     CART(state) {
       return state.cart;
+    },
+    WISH(state) {
+      return state.wish;
     },
   },
 });

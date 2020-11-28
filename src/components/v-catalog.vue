@@ -1,16 +1,66 @@
 <template>
   <div class="v-catalog">
-    <router-link :to="{ name: 'cart', params: {cart_data: CART} }">
-      <div class="v-catalog__link-to-cart">Cart: {{ CART.length }}</div>
-    </router-link>
-    <h1>Catalog</h1>
-    <div class="v-catalog__list">
-      <v-catalog-item
-        v-for="product in PRODUCTS"
-        :key="product.article"
-        :product_data="product"
-        @add-to-cart="addToCart"
-      />
+    <v-header/>
+    <v-notification 
+      :messages="messages"
+      :timeout="3000"
+    />
+    <div class="v-catalog__wrapper">
+      <div class="v-catalog__filters">
+        <h2 class="v-catalog__filters-title">Фильтры</h2>
+        <!-- <v-select 
+          :selected="selected"
+          :options="categories"
+          @select="sortByCategories"
+        />
+        <div class="v-catalog__range-wrapper">
+          <div class="v-catalog__range">
+            <input 
+              type="range" 
+              min="0" 
+              max="100000" 
+              step="10" 
+              class="v-catalog__range-input"
+              v-model.number="minPrice"
+              @change="setChangeSliders"
+            >
+            <input 
+              type="range" 
+              min="0" 
+              max="10000" 
+              step="10" 
+              class="v-catalog__range-input"
+              v-model.number="maxPrice"
+              @change="setChangeSliders"
+            >
+          </div>
+          <div class="v-catalog__range-value">
+            <p class="v-catalog__range-value-text">от: {{ minPrice }}</p>
+            <p class="v-catalog__range-value-text">до: {{ maxPrice }}</p>
+          </div>
+        </div> -->
+        <div class="v-catalog__category">
+          <div class="v-catalog__category-item">Футболки</div>
+          <div class="v-catalog__category-item">Джинсы</div>
+          <div class="v-catalog__category-item">Пальто и куртки</div>
+          <div class="v-catalog__category-item">Рубашки</div>
+          <div class="v-catalog__category-item">Подарочные наборы</div>
+        </div>
+      </div>
+      <div class="v-catalog__list__wrapper">
+        <h2 class="v-catalog__list-title">Каталог товаров</h2>
+        <div class="v-catalog__list">
+          <v-catalog-item
+            v-for="product in filteredProducts"
+            :key="product.article"
+            :product_data="product"
+            @add-to-cart="addToCart"
+            @product-like="likeIt"
+            @product-like-remove="likeItRemove"
+            @product-click="productClick"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -19,54 +69,180 @@
 
 import vCatalogItem from './v-catalog-item'
 import { mapActions, mapGetters } from 'vuex'
+// import vSelect from './v-select'
+import vNotification from './notifications/v-notification'
+import vHeader from './v-header'
+
 
 export default {
   name: 'v-catalog',
   components: {
-    vCatalogItem
+    vHeader,
+    vCatalogItem,
+    // vSelect,
+    vNotification,
   },
   props: {},
   data() {
     return {
-
+      categories: [
+        {name: 'Все', value: 'all'},
+        {name: 'Мужские', value: 'м'},
+        {name: 'Женские', value: 'ж'}
+      ],
+      selected: 'Все',
+      sortedProducts: [],
+      messages: [],
+      minPrice: 0,
+      maxPrice: 100000
     }
   },
   computed: {
     ...mapGetters([
       'PRODUCTS',
-      'CART'
-    ])
+      'CART',
+    ]),
+    filteredProducts() {
+      return this.sortedProducts.length ? this.sortedProducts : this.PRODUCTS;
+    }
   },
   methods: {
     ...mapActions([
       'GET_PRODUCTS_FROM_API',
-      'ADD_TO_CART'
+      'ADD_TO_CART',
+      'ADD_TO_WISH',
+      'DELETE_FROM_WISH'
     ]),
+    likeIt(data) {
+      this.ADD_TO_WISH(data)
+      .then(() => {
+        this.messages.unshift({
+          id: Date.now().toLocaleString(),
+          icon: 'warning',
+          name: 'Товар в списокe желаний'
+        })
+      })
+    },
+    likeItRemove(data) {
+      this.DELETE_FROM_WISH(data)
+      .then(() => {
+        this.messages.unshift({
+          id: Date.now().toLocaleString(),
+          icon: 'error',
+          name: 'Товар не в списокe желаний'
+        })
+      })
+    },
+    productClick(article) {
+      this.$router.push({ name: 'product', query: { 'product': article } })
+
+    },
+    sortByCategories(category) {
+      this.sortedProducts = [...this.PRODUCTS];
+      this.sortedProducts = this.sortedProducts.filter(item => 
+        item.price >= this.minPrice && item.price <= this.maxPrice
+      )
+
+      if (category) {
+        this.selected = category.name;
+        this.sortedProducts = this.sortedProducts.filter(item => item.category === category.name)
+      } 
+      // else {
+      //   category = document.querySelector('.v-select__title');
+      //   const key = this.categories.filter(el => el.name === category.textContent.trim())[0].value;
+      //   console.log('key: ', key);
+      //   this.sortedProducts = this.sortedProducts.filter(item => item.category === key)
+      // }
+
+      // this.sortedProducts = []
+
+      // this.PRODUCTS.map(item => {
+      //   if (item.category === category.name) {
+      //     this.sortedProducts.push(item)
+      //   }
+      // })
+
+      // this.selected = category.name
+    },
     addToCart(data) {
       this.ADD_TO_CART(data)
+      .then(() => {
+        this.messages.unshift({
+          id: Date.now().toLocaleString(),
+          icon: 'success',
+          name: 'Товар добавлен в корзину'
+        })
+      })
+    },
+    setChangeSliders() {
+      if (this.minPrice > this.maxPrice) {
+        let tempPrice = this.maxPrice;
+
+        this.maxPrice = this.minPrice;
+        this.minPrice = tempPrice
+      }
+      this.sortByCategories();
     }
   },
   watch: {},
   mounted() {
     this.GET_PRODUCTS_FROM_API()
+    .then(response => {
+      if (response.data) {
+        this.sortByCategories()
+      }
+    })
   }
 }
 </script>
 
 <style lang="scss">
   .v-catalog {
+    &__wrapper {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+    }
     &__list {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
       flex-wrap: wrap;
+      &-title {
+        text-align: left;
+        margin-left: 20px;
+      }
     }
-    &__link-to-cart {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      padding: 16px;
-      border: 1px solid #aeaeae;
+    &__filters {
+      width: 100%;
+      max-width: 200px;
+      text-align: left;
+    }
+    &__range {
+      position: relative;
+      width: 200px;
+      margin: auto 16px;
+      text-align: center;
+
+      &-value {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      svg,
+      &-input {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+      }
+
+      input[type=range]::-webkit-slider-thumb {
+          position: relative;
+          z-index: 2;
+          top: 2px;
+          margin-top: -7px;
+        }
+
     }
   }
 </style>

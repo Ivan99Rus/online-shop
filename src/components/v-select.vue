@@ -79,6 +79,7 @@ export default {
       right: 0;
       width: 100%;
       border: 1px solid #aeaeae;
+      background-color: #fff;
       &-item {
         margin: 0;
         cursor: pointer;
