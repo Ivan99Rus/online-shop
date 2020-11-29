@@ -2,6 +2,7 @@
   "products": [
     {
       "image": "woman-1.webp",
+      "images": ["woman-1.webp", "woman-1.webp", "woman-1.webp", "woman-1.webp"],
       "name": "Eco Series пуховик из переработанного полиэстера",
       "price": 27300,
       "oldPrice": 30000,
@@ -11,6 +12,7 @@
     },
     {
       "image": "men-1.webp",
+      "images": ["men-1.webp", "men-1.webp", "men-1.webp", "men-1.webp"],
       "name": "Пуховик свободного кроя с облачным принтом",
       "price": 24900,
       "oldPrice": 30000,
@@ -20,6 +22,7 @@
     },
     {
       "image": "men-2.webp",
+      "images": ["men-2.webp", "men-2.webp", "men-2.webp", "men-2.webp"],
       "name": "Джинсовая куртка-бомбер с искусственным мехом",
       "price": 24900,
       "oldPrice": 30000,
@@ -29,6 +32,7 @@
     },
     {
       "image": "woman-2.webp",
+      "images": ["woman-2.webp", "woman-2.webp", "woman-2.webp", "woman-2.webp"],
       "name": "Eco Series пуховик из переработанного полиэстера",
       "price": 27300,
       "article": "J20J214856_XME",
@@ -37,6 +41,7 @@
     },
     {
       "image": "men-3.webp",
+      "images": ["men-3.webp", "men-3.webp", "men-3.webp", "men-3.webp"],
       "name": "Свободный анорак из нетканого искусственного меха",
       "price": 18300,
       "article": "J30J316890_LDD",
@@ -45,6 +50,7 @@
     },
     {
       "image": "men-4.webp",
+      "images": ["men-4.webp", "men-4.webp", "men-4.webp", "men-4.webp"],
       "name": "Двухцветная джинсовая куртка",
       "price": 11460,
       "article": "J30J315530_1AA",
@@ -53,6 +59,7 @@
     },
     {
       "image": "woman-3.webp",
+      "images": ["woman-3.webp", "woman-3.webp", "woman-3.webp", "woman-3.webp"],
       "name": "Худи из органического хлопка размера плюс",
       "price": 11200,
       "article": "J20J215186_AEO",

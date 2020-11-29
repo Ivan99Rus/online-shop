@@ -1,33 +1,37 @@
 <template>
   <div class="v-product-page">
-    <p>Product: {{ product }}</p>
-
-    <swiper
-      :slides-per-view="3"
-      :space-between="50"
-      @swiper="onSwiper"
-      @slideChange="onSlideChange"
-    >
-      <swiper-slide>Slide 1</swiper-slide>
-      <swiper-slide>Slide 2</swiper-slide>
-      <swiper-slide>Slide 3</swiper-slide>
-    </swiper>
+    <v-header/>
+    <div class="v-product-page__wrapper">
+      <div class="v-product-page__slider">
+        <v-slider :slides=slides />
+      </div>
+      <div class="v-product-page__info">
+        <div class="v-product-page__info-name v-catalog-item__name">{{ product.name }}</div>
+        <div class="v-product-page__info-price v-catalog-item__price">{{ product.price }} рублей</div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 
   import { mapGetters, mapActions } from 'vuex'
-  import { Swiper, SwiperSlide } from 'swiper/vue'
+  import vSlider from './v-slider'
+  import vHeader from './v-header'
 
   export default {
     name: "v-product-page",
+    data() {
+      return {
+        slides: []
+      }
+    },
     props: {
       
     },
     components: {
-      Swiper,
-      SwiperSlide,
+      vHeader,
+      vSlider
     },
     computed: {
       ...mapGetters([
@@ -56,7 +60,31 @@
       },
     },
     mounted() {
-      this.GET_PRODUCTS_FROM_API()
+      this.GET_PRODUCTS_FROM_API();
+      
+      this.product.images.forEach(el => {
+        setTimeout(() => {
+          this.slides.push({
+            id: Date.now(),
+            src: el
+          })
+        }, 1)
+      })
     }
   }
 </script>
+
+<style lang="scss">
+  .v-product-page {
+    &__wrapper {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__info {
+      text-align: left;
+      width: 100%;
+      padding: 0 100px;
+    }
+  }
+</style>

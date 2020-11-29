@@ -8,37 +8,11 @@
     <div class="v-catalog__wrapper">
       <div class="v-catalog__filters">
         <h2 class="v-catalog__filters-title">Фильтры</h2>
-        <!-- <v-select 
+        <v-select 
           :selected="selected"
           :options="categories"
           @select="sortByCategories"
         />
-        <div class="v-catalog__range-wrapper">
-          <div class="v-catalog__range">
-            <input 
-              type="range" 
-              min="0" 
-              max="100000" 
-              step="10" 
-              class="v-catalog__range-input"
-              v-model.number="minPrice"
-              @change="setChangeSliders"
-            >
-            <input 
-              type="range" 
-              min="0" 
-              max="10000" 
-              step="10" 
-              class="v-catalog__range-input"
-              v-model.number="maxPrice"
-              @change="setChangeSliders"
-            >
-          </div>
-          <div class="v-catalog__range-value">
-            <p class="v-catalog__range-value-text">от: {{ minPrice }}</p>
-            <p class="v-catalog__range-value-text">до: {{ maxPrice }}</p>
-          </div>
-        </div> -->
         <div class="v-catalog__category">
           <div class="v-catalog__category-item">Футболки</div>
           <div class="v-catalog__category-item">Джинсы</div>
@@ -69,7 +43,7 @@
 
 import vCatalogItem from './v-catalog-item'
 import { mapActions, mapGetters } from 'vuex'
-// import vSelect from './v-select'
+import vSelect from './v-select'
 import vNotification from './notifications/v-notification'
 import vHeader from './v-header'
 
@@ -79,7 +53,7 @@ export default {
   components: {
     vHeader,
     vCatalogItem,
-    // vSelect,
+    vSelect,
     vNotification,
   },
   props: {},
@@ -140,31 +114,31 @@ export default {
       })
     },
     sortByCategories(category) {
-      this.sortedProducts = [...this.PRODUCTS];
-      this.sortedProducts = this.sortedProducts.filter(item => 
-        item.price >= this.minPrice && item.price <= this.maxPrice
-      )
+      // this.sortedProducts = [...this.PRODUCTS];
+      // this.sortedProducts = this.sortedProducts.filter(item => 
+      //   item.price >= this.minPrice && item.price <= this.maxPrice
+      // )
 
-      if (category) {
-        this.selected = category.name;
-        this.sortedProducts = this.sortedProducts.filter(item => item.category === category.name)
-      } 
-      // else {
-      //   category = document.querySelector('.v-select__title');
-      //   const key = this.categories.filter(el => el.name === category.textContent.trim())[0].value;
-      //   console.log('key: ', key);
-      //   this.sortedProducts = this.sortedProducts.filter(item => item.category === key)
-      // }
+      // if (category) {
+      //   this.selected = category.name;
+      //   this.sortedProducts = this.sortedProducts.filter(item => item.category === category.name)
+      // } 
+      // // else {
+      // //   category = document.querySelector('.v-select__title');
+      // //   const key = this.categories.filter(el => el.name === category.textContent.trim())[0].value;
+      // //   console.log('key: ', key);
+      // //   this.sortedProducts = this.sortedProducts.filter(item => item.category === key)
+      // // }
 
-      // this.sortedProducts = []
+      this.sortedProducts = []
 
-      // this.PRODUCTS.map(item => {
-      //   if (item.category === category.name) {
-      //     this.sortedProducts.push(item)
-      //   }
-      // })
+      this.PRODUCTS.map(item => {
+        if (item.category === category.name) {
+          this.sortedProducts.push(item)
+        }
+      })
 
-      // this.selected = category.name
+      this.selected = category.name
     },
     addToCart(data) {
       this.ADD_TO_CART(data)
