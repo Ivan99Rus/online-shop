@@ -25,6 +25,7 @@
       :src=" require('../assets/img/' + product_data.image) " 
       alt="img"
       class="v-catalog-item__img"
+      @click="productClick"
     >
     <div class="v-catalog-item__price-block">
       <div 
@@ -100,7 +101,7 @@ export default {
       
     },
     productClick() {
-      this.$emit('product-click', this.product_data.article)
+      this.$emit('product-click', this.product_data)
     },
     addToCart() {
       this.$emit('add-to-cart', this.product_data);

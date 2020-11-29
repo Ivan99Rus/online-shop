@@ -133,9 +133,11 @@ export default {
         })
       })
     },
-    productClick(article) {
-      this.$router.push({ name: 'product', query: { 'product': article } })
-
+    productClick(product) {
+      this.$router.push({ 
+        name: 'product', 
+        query: { 'article': product.article }
+      })
     },
     sortByCategories(category) {
       this.sortedProducts = [...this.PRODUCTS];

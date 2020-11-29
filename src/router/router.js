@@ -18,7 +18,8 @@ let router = new Router({
     {
       path: '/product',
       name: 'product',
-      component: vProductPage
+      component: vProductPage,
+      props: true
     },
     {
       path: '/cart',
