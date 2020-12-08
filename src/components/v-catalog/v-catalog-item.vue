@@ -10,7 +10,7 @@
       :popupTitle="product_data.name"
     >
       <img 
-        :src=" require('../assets/img/' + product_data.image) " 
+        :src=" require('../../assets/img/' + product_data.image) " 
         alt="img"
         class="v-catalog-item__img"
         @click="productClick"
@@ -22,7 +22,7 @@
       </div>
     </v-popup>
     <img 
-      :src=" require('../assets/img/' + product_data.image) " 
+      :src=" require('../../assets/img/' + product_data.image) " 
       alt="img"
       class="v-catalog-item__img"
       @click="productClick"
@@ -61,8 +61,8 @@
 
 <script>
 
-import vPopup from './popup/v-popup'
-import formatingPrice from '../filters/formatingPrice'
+import vPopup from '../v-popup/v-popup'
+import formatingPrice from '../../filters/formatingPrice'
 
 export default {
   name: 'v-catalog-item',

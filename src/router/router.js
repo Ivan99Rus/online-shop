@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import vCatalog from '../components/v-catalog'
-import vCart from '../components/v-cart'
-import vWish from '../components/v-wish'
-import vProductPage from '../components/v-product-page'
+import vCatalog from '../components/v-catalog/v-catalog'
+import vCart from '../components/v-cart/v-cart'
+import vWish from '../components/v-wish/v-wish'
+import vProductPage from '../components/layouts/v-product-page'
 
 Vue.use(Router)
 

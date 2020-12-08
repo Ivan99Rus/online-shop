@@ -2,7 +2,7 @@
   <div class="v-cart-item">
     <img  
       alt=""
-      :src=" require('../assets/img/' + cart_item_data.image) " 
+      :src=" require('../../assets/img/' + cart_item_data.image) " 
       class="v-cart-item__img"
     >
     <div class="v-cart-item__info">
@@ -49,7 +49,7 @@
 
 <script>
 
-import formatingPrice from '../filters/formatingPrice'
+import formatingPrice from '../../filters/formatingPrice'
 
 export default {
   name: 'v-cart-item',

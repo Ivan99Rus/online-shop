@@ -2,7 +2,7 @@
   <div class="v-wish-item">
     <img  
       alt=""
-      :src=" require('../assets/img/' + wish_item_data.image) " 
+      :src=" require('../../assets/img/' + wish_item_data.image) " 
       class="v-wish-item__img"
     >
     <div class="v-wish-item__info">      
@@ -26,7 +26,7 @@
 
 <script>
 
-import formatingPrice from '../filters/formatingPrice'
+import formatingPrice from '../../filters/formatingPrice'
 
 export default {
   name: 'v-wish-item',

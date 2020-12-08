@@ -41,11 +41,11 @@
 
 <script>
 
-import vCatalogItem from './v-catalog-item'
+import vCatalogItem from '../v-catalog/v-catalog-item'
 import { mapActions, mapGetters } from 'vuex'
-import vSelect from './v-select'
-import vNotification from './notifications/v-notification'
-import vHeader from './v-header'
+import vSelect from '../libs/v-select'
+import vNotification from '../notifications/v-notification'
+import vHeader from '../layouts/v-header'
 
 
 export default {
@@ -114,22 +114,6 @@ export default {
       })
     },
     sortByCategories(category) {
-      // this.sortedProducts = [...this.PRODUCTS];
-      // this.sortedProducts = this.sortedProducts.filter(item => 
-      //   item.price >= this.minPrice && item.price <= this.maxPrice
-      // )
-
-      // if (category) {
-      //   this.selected = category.name;
-      //   this.sortedProducts = this.sortedProducts.filter(item => item.category === category.name)
-      // } 
-      // // else {
-      // //   category = document.querySelector('.v-select__title');
-      // //   const key = this.categories.filter(el => el.name === category.textContent.trim())[0].value;
-      // //   console.log('key: ', key);
-      // //   this.sortedProducts = this.sortedProducts.filter(item => item.category === key)
-      // // }
-
       this.sortedProducts = []
 
       this.PRODUCTS.map(item => {

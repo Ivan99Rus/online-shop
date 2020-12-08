@@ -16,8 +16,8 @@
 <script>
 
   import { mapGetters, mapActions } from 'vuex'
-  import vSlider from './v-slider'
-  import vHeader from './v-header'
+  import vSlider from '../libs/v-slider'
+  import vHeader from '../layouts/v-header'
 
   export default {
     name: "v-product-page",

@@ -5,7 +5,7 @@
       :key="slide.id"
     >
     <img 
-      :src=" require('../assets/img/' + slide.src) " 
+      :src=" require('../../assets/img/' + slide.src) " 
       alt="img"
     >
     </swiper-slide>

@@ -35,9 +35,9 @@
 
 <script>
 
-import vCartItem from './v-cart-item'
+import vCartItem from '../v-cart/v-cart-item'
 import { mapActions } from 'vuex'
-import vHeader from './v-header'
+import vHeader from '../layouts/v-header'
 
 export default {
   name: 'v-cart',

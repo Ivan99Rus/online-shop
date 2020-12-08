@@ -38,7 +38,7 @@
 
 import vWishItem from './v-wish-item'
 import { mapActions, mapGetters } from 'vuex'
-import vHeader from './v-header'
+import vHeader from '../layouts/v-header'
 
 export default {
   name: 'v-wish',
